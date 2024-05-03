@@ -1,7 +1,7 @@
 import pygame
 import player7
 import player8
-import gamemech
+from server.server_impl import gamemech
 import boost
 import time
 from random import randint
