@@ -12,8 +12,11 @@ class Rastro(pygame.sprite.DirtySprite):
         #size_rate = size / initial_size[0]
         #self.new_size = (int(self.image.get_size()[0] * size_rate), int(self.image.get_size()[1] * size_rate))
         self.image = pygame.transform.scale(self.image, (size, size))
-        self.rect = pygame.rect.Rect((pos_x*size, pos_y*size), self.image.get_size())
+        self.pos = (pos_x * size, pos_y * size)
+        self.rect = pygame.rect.Rect(self.pos, self.image.get_size())
 
     def kill(self) -> None:
         super().kill()
 
+    def get_pos(self):
+        return self.pos

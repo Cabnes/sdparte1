@@ -10,7 +10,7 @@ LEFT = 3
 # It defines a sprite with size rate
 class Player(pygame.sprite.DirtySprite):
     # Já não precisamos da acelaração. As posições são as posições dos quadrados... size é a dimensão do quadrado
-    def __init__(self, pos_x: int, pos_y: int, size: int, my_id: int, cs: ClientStub, direction, *groups):
+    def __init__(self, pos_x: int, pos_y: int, img: str, size: int, my_id: int, cs: ClientStub, direction, *groups):
 
     #def __init__(self,pos_x:int, pos_y:int, acc:int, size:int, *groups ):
         super().__init__(*groups)
@@ -20,7 +20,7 @@ class Player(pygame.sprite.DirtySprite):
         self.boost = False
         self.contador = 0
         self.boost_ativo = False
-        self.image = pygame.image.load("pixel_racecar_orange.png")
+        self.image = pygame.image.load(img)
         initial_size = self.image.get_size()
         size_rate = size / initial_size[0]
         #self.new_size = (int(self.image.get_size()[0] * size_rate), int(self.image.get_size()[1] * size_rate))
@@ -46,7 +46,6 @@ class Player(pygame.sprite.DirtySprite):
 
     def set_boost(self, boost: bool):
         self.boost = boost
-    #    def update(self, dt:float, game:object):
 
     # Já não definimos a velocidade. Eles irão deslocar-se todos à mesma velocidade...
     def update(self, game: object) -> bool:
@@ -77,14 +76,6 @@ class Player(pygame.sprite.DirtySprite):
             contador = 1
         for i in range(contador):
             self.cs.get_new_pos(self.my_id, self.direcao)
-            if None in new_pos:
-                return True
-            '''# new_pos = [self.pos[0] + 1, self.pos[1]]
-            self.rect.x = new_pos[0] * self.size
-            self.rect.y = new_pos[1] * self.size
-            self.pos = new_pos
-            self.image = pygame.transform.rotate(self.image_inicial, 90 * self.direcao)
-        self.pos = new_pos'''
         # Keep visible
         self.dirty = 1
         return False
